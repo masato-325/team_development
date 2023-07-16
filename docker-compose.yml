@@ -4,6 +4,14 @@ volumes:
   db-data:
 
 services:
+  db:
+    image: postgres
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=postgres'
+
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -19,11 +27,3 @@ services:
       - db
     links:
       - db
-
-  db:
-    image: postgres
-    volumes:
-      - 'db-data:/var/lib/postgresql/data'
-    environment:
-      - 'POSTGRES_USER=postgres'
-      - 'POSTGRES_PASSWORD=postgres'

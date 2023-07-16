@@ -1,14 +1,27 @@
-FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y \
-        build-essential \
-        libpq-dev \
-        nodejs \
-        postgresql-client \
-        vim \
-        yarn
+FROM ruby:3.0
 
-WORKDIR /team_development
+# PostgreSQLクライアントをインストール
+RUN apt-get update -qq && apt-get install -y postgresql-client
 
-COPY Gemfile Gemfile.lock /team_development/
+WORKDIR /myapp
 
+# Node.js (LTS)をインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+
+# Yarnをインストール
+RUN npm install --global yarn
+
+# Gemfileをコピーして依存関係をインストール
+COPY Gemfile* /team_development/
 RUN bundle install
+
+# コンテナが起動するたびに実行されるスクリプトを追加
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]
+
+# コンテナが実行される際にメインプロセスとして設定されるコマンドを指定
+CMD ["rails", "server", "-b", "0.0.0.0"]
+
+EXPOSE 3000
