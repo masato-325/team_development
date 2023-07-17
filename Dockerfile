@@ -1,27 +1,30 @@
-FROM ruby:3.0
+# Rubyのバージョンを指定してベースイメージを取得
+FROM ruby:3.1
 
-# PostgreSQLクライアントをインストール
-RUN apt-get update -qq && apt-get install -y postgresql-client
+# aptパッケージマネージャーを使ってPostgreSQLクライアントをインストール
+RUN apt update -qq && apt install -y postgresql-client
 
-WORKDIR /myapp
+# /team_developmentディレクトリを作成し、作業ディレクトリを設定
+RUN mkdir /team_development
+WORKDIR /team_development
 
-# Node.js (LTS)をインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
-
-# Yarnをインストール
-RUN npm install --global yarn
-
-# Gemfileをコピーして依存関係をインストール
-COPY Gemfile* /team_development/
+# GemfileとGemfile.lockをコピーして、bundle installを実行
+COPY Gemfile /team_development/Gemfile
+COPY Gemfile.lock /team_development/Gemfile.lock
 RUN bundle install
 
-# コンテナが起動するたびに実行されるスクリプトを追加
+# カレントディレクトリのファイルを全てコピー
+COPY . /team_development
+
+# entrypoint.shスクリプトを/usr/bin/ディレクトリにコピーし、実行権限を付与
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
+# コンテナのエントリーポイントを設定
 ENTRYPOINT ["entrypoint.sh"]
 
-# コンテナが実行される際にメインプロセスとして設定されるコマンドを指定
-CMD ["rails", "server", "-b", "0.0.0.0"]
-
+# ポート3000をコンテナの外部に公開
 EXPOSE 3000
+
+# デフォルトのコマンドとしてrails serverを実行し、IPアドレス0.0.0.0にバインドする
+CMD ["rails", "server", "-b", "0.0.0.0"]
