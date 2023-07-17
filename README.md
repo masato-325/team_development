@@ -1,24 +1,16 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# team_development
+## アプリの名称
+「なんでもtodoリスト」
+## アプリの機能
+- ログインができる
+- 新規ユーザー登録ができる
+- todoリストを作成することができる
+- todoリストを削除することができる
+- todoリストを編集することができる
+- todoリストを完了することができる
+- 開始日と完了予定日を設定することができる
+- todoリストに題名をつけることができる
+- 過去のtodoリストを検索することができる
+- todoリストを用途に分けることができる
+    - 毎日使うものであれば、設定時間にチェックがなくなり作成された状態に戻る
+    - 短期間や長期間的なものは全てチェックされると完了になる 
