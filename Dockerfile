@@ -4,6 +4,13 @@ FROM ruby:3.1
 # aptパッケージマネージャーを使ってPostgreSQLクライアントをインストール
 RUN apt update -qq && apt install -y postgresql-client
 
+# yarnパッケージマネージャーをインストール
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+  && wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+  && apt-get update -qq \
+  && apt-get install -y nodejs yarn
+
 # /team_developmentディレクトリを作成し、作業ディレクトリを設定
 RUN mkdir /team_development
 WORKDIR /team_development
