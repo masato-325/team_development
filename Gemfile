@@ -69,6 +69,7 @@ group :development do
   gem "ransack"  # Search and filtering
   gem "kaminari"  # Pagination
   gem 'cssbundling-rails' # tailwindCSS Bundling
+  gem 'jsbundling-rails' # tailwindCSS Bundling
 end
 
 group :test do
