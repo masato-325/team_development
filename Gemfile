@@ -62,6 +62,13 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # Additional Gems
+  gem "sorcery"  # User authentication and authorization
+  gem "byebug"  # Ruby debugger
+  gem "ransack"  # Search and filtering
+  gem "kaminari"  # Pagination
+  gem 'cssbundling-rails' # tailwindCSS Bundling
 end
 
 group :test do
