@@ -1,0 +1,32 @@
+<div
+  class="block max-w-md rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1>ユーザー登録</h1>
+      <%= form_with model: @user, local: true do |f| %>
+        <div input type="text" placeholder="Type here" class="input input-bordered input-secondary w-full max-w-xs" >
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div input type="text" placeholder="Type here" class="input input-bordered input-secondary w-full max-w-xs" >
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div input type="text" placeholder="Type here" class="input input-bordered input-secondary w-full max-w-xs" >
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <div input type="text" placeholder="Type here" class="input input-bordered input-secondary w-full max-w-xs" >
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div>
+        <%= f.submit '登録', class: 'btn btn-primary' %>
+      <% end %>
+      <div class='text-center'>
+        <%= link_to 'ログインページへ', login_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
