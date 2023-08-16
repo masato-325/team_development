@@ -1,0 +1,22 @@
+<header class="body-font">
+  <div class="navbar bg-primary text-white">
+    <div class="flex-1 px-2 lg:flex-none">
+      <a class="text-lg font-bold">daisyUI</a>
+    </div>
+    <div class="flex justify-end flex-1 px-2">
+      <div class="flex items-stretch">
+        <a class="btn btn-ghost rounded-btn">Button</a>
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost rounded-btn">Dropdown</label>
+        <ul tabindex="0" class="text-gray-700 menu dropdown-content z-[1] p-2 shadow bg-base-100 bg- rounded-box w-52 mt-4">
+            <li><a>Item 1</a></li>
+            <li><a>Item 2</a></li>
+            <li><%= button_to t('defaults.logout'), '#', method: :delete %></li>
+          </ul>
+        </label>
+      </div>
+    <%# else %>
+      <%= link_to t('defaults.login'), '#', class: 'btn btn-square btn-ghost whitespace-nowrap w-24' %>
+    <%# end %>
+  </div>
+</header>
